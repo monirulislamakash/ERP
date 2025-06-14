@@ -1,0 +1,5 @@
+from django.test import TestCase
+
+# Create your tests here.
+
+# <bound method MultiValueDict.get of <QueryDict: {'firstname': ['l;klhj'], 'lastname': ['jbj'], 'email': ['bij'], 'phonenumber': ['bij'], 'Designation': ['bij'], 'Department': ['b'], 'PermanentAddress': ['ib'], 'PresentAddress': ['ib'], 'Salary': ['ij'], 'JoiningDate': [''], 'PermanencyDate': [''], 'Image': [''], 'BankName': ['ij'], 'BankAccountName': ['bi'], 'BankAccountNumber': ['jbi'], 'BankBranchName': ['b'], 'BankSwiftCode': ['ib'], 'BankRoutingNumber': ['ijb'], 'BankPhoneNumber': ['ib'], 'NIDNumber': ['i'], 'TINNumber': ['bi'], 'FatherName': ['bi'], 'MotherName': ['bi'], 'EmployeStatus': ['Employe Status'], 'UserAccess': ['User Access'], 'AppointmentLetter': [''], 'NDA': [''], 'SalaryIncrementLetter': [''], 'PromotionLetter': ['']}>

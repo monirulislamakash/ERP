@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% block head %}
+{% endblock %}
+{% block title %}{% endblock %}
+{% block body %}
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="row">
+            {% if addStatus == "success" %}
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="display: block;">
+                <div class="toast-header" style="color:green;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                    </svg>
+                    <strong class="me-auto ms-2">Success</strong>
+
+                    <button type="button" class="btn-close" onclick="toaster()" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    <strong>User Added successfully.</strong>
+                </div>
+            </div>
+            {% elif addStatus == "error" %}
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="display: block;">
+                <div class="toast-header text-danger">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                    </svg>
+                    <strong class="me-auto ms-2">Sorry !</strong>
+
+                    <button type="button" class="btn-close" onclick="toaster()" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    <strong>User Already Exists</strong>
+                </div>
+            </div>
+            {% endif %}
+            <div class="col-lg-8 m-auto">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Add Employee</h5>
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url 'company:addUser' %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">First Name</label>
+                                <input type="text" name="firstname" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Last Name</label>
+                                <input type="text" name="lastname" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Email</label>
+                                <input type="text" name="email" required class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Phone Number</label>
+                                <input type="text" name="phonenumber" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Emergency Phone Number</label>
+                                <input type="text" name="EmergencyPhoneNumber" class="form-control"
+                                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Designation</label>
+                                <input type="text" name="Designation" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <select name="Department" class="form-select mb-3" aria-label="Default select example">
+                                <option>Departments</option>
+                                {% for i in Departments %}
+                                <option>{{i.Department}}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Permanent Address</label>
+                                <input type="text" name="PermanentAddress" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Present Address</label>
+                                <input type="text" name="PresentAddress" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Salary</label>
+                                <input type="text" name="Salary" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Joining Date</label>
+                                <input type="date" name="JoiningDate" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Permanency Date</label>
+                                <input type="date" name="PermanencyDate" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Image</label>
+                                <input type="file" name="Image" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Bank Name</label>
+                                <input type="text" name="BankName" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Bank Account Name</label>
+                                <input type="text" name="BankAccountName" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Bank Account Number</label>
+                                <input type="text" name="BankAccountNumber" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Bank Branch Name</label>
+                                <input type="text" name="BankBranchName" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Bank Swift Code</label>
+                                <input type="text" name="BankSwiftCode" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Bank Routing Number</label>
+                                <input type="text" name="BankRoutingNumber" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Bank Phone Number</label>
+                                <input type="text" name="BankPhoneNumber" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">NID Number</label>
+                                <input type="text" name="NIDNumber" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">TIN Number</label>
+                                <input type="text" name="TINNumber" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Father Name</label>
+                                <input type="text" name="FatherName" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Mother Name</label>
+                                <input type="text" name="MotherName" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <select name="EmployeStatus" class="form-select mb-3" aria-label="Default select example">
+                                <option>Employe Status</option>
+                                <option>Probation</option>
+                                <option>Permanent</option>
+                            </select>
+                            <select name="UserAccess" class="form-select mb-3" aria-label="Default select example">
+                                <option>User Access</option>
+                                <option>Employe</option>
+                                <option>Admin</option>
+                                <option>HR</option>
+                                <option>Accounts</option>
+                                <option>Project Manager</option>
+                            </select>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Appointment Letter</label>
+                                <input type="file" name="AppointmentLetter" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">NDA</label>
+                                <input type="file" name="NDA" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Salary Increment Letter</label>
+                                <input type="file" name="SalaryIncrementLetter" class="form-control"
+                                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Promotion Letter</label>
+                                <input type="file" name="PromotionLetter" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="d-grid gap-2 mt-5">
+                                <button class="btn btn-primary AddEmployee" type="submit">
+                                    <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                                    Add Employee
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

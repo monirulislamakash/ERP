@@ -1,0 +1,34 @@
+.toast {
+    display: block;
+    position: absolute;
+    right: 1%;
+    top: 2.5%;
+    z-index: 2 !important;
+    transition: all 0.5s ease-in-out;
+}
+.AddEmployee{
+    height:50px;
+    width:100%;
+}
+.AddEmployee span{
+    display:none;
+}
+.sorryGif{
+    width:100px;
+    height:auto;
+    display: block;
+    margin: 0 auto;
+}
+.sorryUsenNotFound{
+    font-size: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #3d5ee1;
+    margin-top:0px;
+    margin-bottom:50px;
+}
+
+
+@media screen and (max-width: 600px) {
+    
+}

@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% block head %}
+{% endblock %}
+{% block title %}{% endblock %}
+{% block body %}
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col">
+                    <h3 class="page-title">Profile</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Profile</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="profile-header">
+                    <div class="row align-items-center">
+                        <div class="col-auto profile-image">
+                            <a href="#">
+                                <img class="rounded-circle" alt="User Image" src="{{getMyInfo.Image.url}}">
+                            </a>
+                        </div>
+                        <div class="col ms-md-n2 profile-user-info">
+                            <h4 class="user-name mb-0">{{getMyInfo.FirstName}} {{getMyInfo.LastName}}</h4>
+                            <h6 class="text-muted">{{getMyInfo.Designation}}</h6>
+                            <div class="user-Location"><i class="fas fa-briefcase"></i> {{getMyInfo.Department}}</div>
+                        </div>
+                        <div class="col-auto profile-btn">
+                            <a href="" class="btn btn-primary">
+                                Edit
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-menu">
+                    <ul class="nav nav-tabs nav-tabs-solid">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#per_details_tab">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#password_tab">Update Password</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content profile-tab-cont">
+
+                    <div class="tab-pane fade show active" id="per_details_tab">
+
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title d-flex justify-content-between">
+                                            <span>Personal Details</span>
+                                            <a class="edit-link" data-bs-toggle="modal" href="#edit_personal_details"><i
+                                                    class="far fa-edit me-1"></i>Edit</a>
+                                        </h5>
+                                        <div class="row mt-4">
+                                            <p class="col-sm-3 text-muted text-sm-end text-lg-start mb-0 mb-sm-3">Email
+                                            </p>
+                                            <p class="col-sm-9">: {{getMyInfo.Email}}</p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-sm-3 text-muted text-sm-end text-lg-start mb-0 mb-sm-3">Phone
+                                                Numbe</p>
+                                            <p class="col-sm-9">: {{getMyInfo.PhoneNumbe}}</p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-sm-3 text-muted text-sm-end text-lg-start mb-0 mb-sm-3">
+                                                Joining Date</p>
+                                            <p class="col-sm-9">: {{getMyInfo.JoiningDate}}</p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-sm-3 text-muted text-sm-end text-lg-start mb-0 mb-sm-3">
+                                                Permanency Date</p>
+                                            <p class="col-sm-9">: {{getMyInfo.PermanencyDate}}</p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-sm-3 text-muted text-sm-end text-lg-start mb-0 mb-sm-3">
+                                                Permanent Address</p>
+                                            <p class="col-sm-9">: {{getMyInfo.PermanentAddress}}</p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-sm-3 text-muted text-sm-end text-lg-start mb-0 mb-sm-3">
+                                                Present Address</p>
+                                            <p class="col-sm-9">: {{getMyInfo.PresentAddress}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title d-flex justify-content-between">
+                                            <span>Legal & Documents</span>
+                                        </h5>
+                                        <div class="row mt-4">
+                                            <a href="{{getMyInfo.AppointmentLetter}}">
+                                                <p class="text-muted text-sm-end text-lg-start mb-0 mb-sm-3">Appointment
+                                                    Letter</p>
+                                            </a>
+                                        </div>
+                                        <div class="row">
+                                            <a href="{{getMyInfo.SalaryIncrementLetter}}">
+                                                <p class="text-muted text-sm-end text-lg-start mb-0 mb-sm-3">Salary
+                                                    Increment Letter</p>
+                                            </a>
+                                        </div>
+                                        <div class="row">
+                                            <a href="{{getMyInfo.PromotionLetter}}">
+                                                <p class="text-muted text-sm-end text-lg-start mb-0 mb-sm-3">Promotion
+                                                    Letter</p>
+                                            </a>
+                                        </div>
+                                        <div class="row">
+                                            <a href="{{getMyInfo.NDA}}">
+                                                <p class="text-muted text-sm-end text-lg-start mb-0 mb-sm-3">NDA</p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title d-flex justify-content-between">
+                                            <span>Bank Details</span>
+                                            <a class="edit-link" data-bs-toggle="modal" href="#edit_personal_details"><i
+                                                    class="far fa-edit me-1"></i>Edit</a>
+                                        </h5>
+                                        <div class="row mt-4">
+                                            <p class="col-sm-3 text-muted text-sm-end text-lg-start mb-0 mb-sm-3">Bank
+                                                Name</p>
+                                            <p class="col-sm-9">: {{getMyInfo.BankName}}</p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-sm-3 text-muted text-sm-end text-lg-start mb-0 mb-sm-3">
+                                                Account Name</p>
+                                            <p class="col-sm-9">: {{getMyInfo.BankAccountName}}</p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-sm-3 text-muted text-sm-end text-lg-start mb-0 mb-sm-3">
+                                                Account Number</p>
+                                            <p class="col-sm-9">: {{getMyInfo.BankAccountNumber}}</p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-sm-3 text-muted text-sm-end text-lg-start mb-0 mb-sm-3">Branch
+                                                Name</p>
+                                            <p class="col-sm-9">: {{getMyInfo.BankBranchName}}</p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-sm-3 text-muted text-sm-end text-lg-start mb-0 mb-sm-3">Swift
+                                                Code</p>
+                                            <p class="col-sm-9">: {{getMyInfo.BankSwiftCode}}</p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-sm-3 text-muted text-sm-end text-lg-start mb-0 mb-sm-3">
+                                                Routing Number</p>
+                                            <p class="col-sm-9">: {{getMyInfo.BankRoutingNumber}}</p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-sm-3 text-muted text-sm-end text-lg-start mb-0 mb-sm-3">Phone
+                                                Number</p>
+                                            <p class="col-sm-9">: {{getMyInfo.BankPhoneNumber}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="password_tab" class="tab-pane fade">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Change Password</h5>
+                                <div class="row">
+                                    <div class="col-md-10 col-lg-6">
+                                        <form>
+                                            <div class="form-group">
+                                                <label>Old Password</label>
+                                                <input type="password" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>New Password</label>
+                                                <input type="password" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Confirm Password</label>
+                                                <input type="password" class="form-control">
+                                            </div>
+                                            <button class="btn btn-primary" type="submit">Save Changes</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
