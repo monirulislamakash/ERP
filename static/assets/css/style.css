@@ -2129,7 +2129,8 @@ div.dataTables_wrapper div.dataTables_length select {
     width: 100%;
     height: 100%;
     -o-object-fit: cover;
-    object-fit: cover
+    object-fit: cover;
+    object-position: top;
 }
 
 .avatar-title {
@@ -2504,7 +2505,9 @@ div.dataTables_wrapper div.dataTables_length select {
     width: 40px;
     height: 40px;
     border: 2px solid #e6e6e6;
-    padding: 2px
+    padding: 2px;
+    object-fit: cover;
+    object-position: top;
 }
 
 .user-menu.nav>li>a.mobile_btn {
@@ -3090,7 +3093,7 @@ footer p {
 
 .login-wrapper .loginbox .login-left {
     align-items: center;
-    background: #18aefa;
+    background: #3d5ee1;
     flex-direction: column;
     justify-content: end;
     width: 400px;
@@ -3303,8 +3306,8 @@ footer p {
 }
 
 .btn-primary.primary-reset {
-    background-color: #18aefa;
-    border-color: #18aefa
+    background-color: #3d5ee1;
+    border-color: #3d5ee1
 }
 
 .btn-primary.primary-reset:hover {
@@ -4350,9 +4353,9 @@ table.table-inbox tbody tr.checked {
 .profile-user-img {
     margin-right: 20px;
     position: relative;
-    top: -30px
-
+    top: -30px;
 }
+
 
 .profile-user-img img {
     border-radius: 50%;

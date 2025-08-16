@@ -19,6 +19,10 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 
+admin.site.site_header = "Ray ERP"
+admin.site.index_title = "Welcome to the Ray ERP Admin Panel"
+admin.site.site_title = "Ray ERP Admin"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('company.urls',namespace='company'))

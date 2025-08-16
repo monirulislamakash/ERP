@@ -1,63 +1,19 @@
+// Attendance Oprations
 let markAttendance = () => {
   let progressBar = document.querySelector('.progress-bar');
-  document.getElementById('Mark_AttendanceText').innerText = "Getting location, please wait...";
+  document.getElementById('Mark_AttendanceText').innerText = "please wait...";
   document.getElementById('progress').style.display = "block";
   progressBar.style.width = '0%'; // Reset progress bar
 
-  document.getElementById('Mark_AttendanceText').innerText = "Location obtained. Marking attendance...";
+  document.getElementById('Mark_AttendanceText').innerText = "Marking attendance...";
   setTimeout(() => {
     progressBar.style.width = '100%';
-  }, 500);
+  }, 200);
   setTimeout(() => {
     document.getElementById('submitFrom').submit();
   }, 2000);
-
-
-  // let attempts = 0;
-  // const maxAttempts = 1; // Try a few times
-  // const desiredAccuracy = 50; // In meters, e.g., aiming for 50m accuracy
-
-  // const getLocation = () => {
-  //     navigator.geolocation.getCurrentPosition(
-  //         (position) => {
-  //             const currentAccuracy = position.coords.accuracy;
-  //             console.log("Current accuracy:", currentAccuracy, "meters");
-
-  //             if (currentAccuracy <= desiredAccuracy || attempts >= maxAttempts) {
-  //                 // Either accurate enough, or ran out of attempts
-  //                 document.getElementById('latitude').value = position.coords.latitude;
-  //                 document.getElementById('longitude').value = position.coords.longitude;
-
-  //                 document.getElementById('Mark_AttendanceText').innerText = "Location obtained. Marking attendance...";
-  //                 setTimeout(() => {
-  //                     progressBar.style.width = '100%';
-  //                 }, 500);
-  //                 setTimeout(() => {
-  //                     document.getElementById('submitFrom').submit();
-  //                 }, 2000); // Shorter delay after location is confirmed
-  //             } else {
-  //                 // Not accurate enough, try again
-  //                 attempts++;
-  //                 document.getElementById('Mark_AttendanceText').innerText = `Improving accuracy... Attempt ${attempts} of ${maxAttempts}`;
-  //                 setTimeout(getLocation, 2000); // Wait 2 seconds before retrying
-  //             }
-  //         },
-  //         (error) => {
-  //             console.error("Geolocation error:", error);
-  //             document.getElementById('Mark_AttendanceText').innerText = "Could not get location. Error: " + error.message;
-  //             // Optionally hide progress bar or show an error state
-  //             document.getElementById('progress').style.display = "none";
-  //         },
-  //         {
-  //             enableHighAccuracy: true, // Request best possible accuracy
-  //             timeout: 10000,          // Give it 10 seconds to get a fix
-  //             maximumAge: 0            // Don't use a cached position, always get fresh
-  //         }
-  //     );
-  // };
-
-  // getLocation(); // Start the process
 };
+// Acction Opration
 let toaster = () => {
   let toast = document.querySelector('.toast')
   toast.style.display = "none";
@@ -67,24 +23,35 @@ setTimeout(() => {
   toast.style.display = "none";
 }, 5000)
 
+// Seclect Leave Option
+// Wait for the DOM to be fully loaded before running the script
+document.addEventListener('DOMContentLoaded', () => {
+  // Get the select element and all content divs
+  const selectElement = document.getElementById('contentSelector');
+  const contentDivs = document.querySelectorAll('#contentContainer > div');
 
-// const options = {
-//   enableHighAccuracy: true,
-//   timeout: 5000,
-//   maximumAge: 0,
-// };
+  /**
+   * Handles the change event on the select element.
+   * It hides all content divs and then shows the one corresponding to the selected option.
+   */
+  const handleSelectChange = () => {
+    // Get the value of the currently selected option
+    const selectedValue = selectElement.value;
 
-// function success(pos) {
-//   const crd = pos.coords;
+    // Loop through all content divs and hide them
+    contentDivs.forEach(div => {
+      div.style.display = 'none';
+    });
 
-//   console.log("Your current position is:");
-//   console.log(`Latitude : ${crd.latitude}`);
-//   console.log(`Longitude: ${crd.longitude}`);
-//   console.log(`More or less ${crd.accuracy} meters.`);
-// }
+    // If a valid option is selected (not 'none'), show the corresponding div
+    if (selectedValue !== 'none') {
+      const selectedContentDiv = document.getElementById(selectedValue);
+      if (selectedContentDiv) {
+        selectedContentDiv.style.display = 'block';
+      }
+    }
+  };
 
-// function error(err) {
-//   console.warn(`ERROR(${err.code}): ${err.message}`);
-// }
-
-// navigator.geolocation.getCurrentPosition(success, error, options);
+  // Add the change event listener to the select element
+  selectElement.addEventListener('change', handleSelectChange);
+});

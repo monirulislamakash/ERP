@@ -3,7 +3,7 @@
 {% load static %}
 {% block head %}
 {% endblock %}
-{% block title %}{% endblock %}
+{% block titel %}Profile{% endblock %}
 {% block body %}
 <div class="page-wrapper">
     <div class="content container-fluid">
@@ -20,6 +20,44 @@
         </div>
 
         <div class="row">
+            {% if success %}
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="display: block;">
+                <div class="toast-header" style="color:green;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                    </svg>
+                    <strong class="me-auto ms-2">Success</strong>
+
+                    <button type="button" class="btn-close" onclick="toaster()" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    <strong> {{success}}. </strong>
+                </div>
+            </div>
+            {% endif %}
+            {% if error %}
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="display: block;">
+                <div class="toast-header" style="color:#f0a100;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                    </svg>
+                    <strong class="me-auto ms-2">Sorry !</strong>
+
+                    <button type="button" class="btn-close" onclick="toaster()" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    <strong> {{error}}. </strong>
+                </div>
+            </div>
+            {% endif %}
+
+
             <div class="col-md-12">
                 <div class="profile-header">
                     <div class="row align-items-center">
@@ -34,7 +72,7 @@
                             <div class="user-Location"><i class="fas fa-briefcase"></i> {{getMyInfo.Department}}</div>
                         </div>
                         <div class="col-auto profile-btn">
-                            <a href="" class="btn btn-primary">
+                            <a href="{% url 'company:UpdateProfile' %}" class="btn btn-primary">
                                 Edit
                             </a>
                         </div>
@@ -47,6 +85,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-bs-toggle="tab" href="#password_tab">Update Password</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#applicationTab">Leave Application Status</a>
                         </li>
                     </ul>
                 </div>
@@ -182,21 +223,91 @@
                                 <h5 class="card-title">Change Password</h5>
                                 <div class="row">
                                     <div class="col-md-10 col-lg-6">
-                                        <form>
+                                        <form method="POST" action="{% url 'company:updatepassword' %}">
+                                            {% csrf_token %}
                                             <div class="form-group">
                                                 <label>Old Password</label>
-                                                <input type="password" class="form-control">
+                                                <input type="password" class="form-control" name="old_password">
                                             </div>
                                             <div class="form-group">
                                                 <label>New Password</label>
-                                                <input type="password" class="form-control">
+                                                <input type="password" class="form-control" name="new_password1">
                                             </div>
                                             <div class="form-group">
                                                 <label>Confirm Password</label>
-                                                <input type="password" class="form-control">
+                                                <input type="password" class="form-control" name="new_password2">
                                             </div>
                                             <button class="btn btn-primary" type="submit">Save Changes</button>
                                         </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="applicationTab" class="tab-pane fade">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-10 col-lg-12">
+                                        <table
+                                            class="table border-0 star-student table-hover table-center mb-0 datatable table-striped">
+                                            <thead class="student-thread">
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Subject</th>
+                                                    <th>Status</th>
+                                                    <th>Leave Type</th>
+                                                    <th>HR</th>
+                                                    <th>Project Manager</th>
+                                                    <th>MD</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for leave in LeaveApplication %}
+                                                <tr>
+                                                    <td>{{leave.SubmitionDate}}</td>
+                                                    <td>{{leave.Subject}}</td>
+                                                    <td>
+                                                        {% if leave.HR_approval and leave.PM_approval and leave.MD_approval %}
+                                                        <span class="badge bg-success">Approved</span>
+                                                        {% elif leave.HR_reject == True or leave.PM_reject == True or leave.MD_reject == True %}
+                                                        <span class="badge bg-danger">Rejected</span>
+                                                        {% else %}
+                                                        <span class="badge bg-secondary">Panding</span>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>{{leave.LeaveType}}</td>
+                                                    <td>
+                                                        {% if leave.HR_approval == True %}
+                                                        <span class="badge bg-success">Approved</span>
+                                                        {% elif leave.HR_reject %}
+                                                        <span class="badge bg-danger">Rejected</span>
+                                                        {% else %}
+                                                        <span class="badge bg-secondary">Panding</span>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if leave.PM_approval == True %}
+                                                        <span class="badge bg-success">Approved</span>
+                                                        {% elif leave.PM_reject %}
+                                                        <span class="badge bg-danger">Rejected</span>
+                                                        {% else %}
+                                                        <span class="badge bg-secondary">Didn't get yet</span>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if leave.MD_approval == True %}
+                                                        <span class="badge bg-success">Approved</span>
+                                                        {% elif leave.MD_reject %}
+                                                        <span class="badge bg-danger">Rejected</span>
+                                                        {% else %}
+                                                        <span class="badge bg-secondary">Didn't get yet</span>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>

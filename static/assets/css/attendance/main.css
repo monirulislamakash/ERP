@@ -1,34 +1,167 @@
+.Mark_Attendance {
+    margin: 0 auto;
+    display: flex;
+    border-radius: 7px;
+    padding: 30px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.Mark_Attendance h1 {
+    font-family: roboto, sans-serif;
+    margin-top: 0;
+    color: #3d5ee1;
+    text-align: center;
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+.Mark_Attendance p {
+    color: #606060;
+    font-weight: 600;
+}
+
+.AttendanceButton {
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+    background: #3d5ee1;
+    color: #fff;
+    border: 5px solid #6f87e5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+
+.AttendanceButton svg {
+    width: 80%;
+    height: 80%;
+}
+
+.AttendanceButton:hover {
+    transform: scale(0.9);
+}
+
+#submitFrom {
+    display: none;
+}
+
+.progress-bar-container {
+    width: 200px !important;
+    border-radius: 24px;
+    background: #DDDCDC;
+    height: 15px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    width: 100%;
+    display: none;
+}
+
+.progress-bar {
+    border-radius: 24px;
+    background: #3d5ee1;
+    height: 100%;
+    width: 0%;
+    transition: width 3s ease-in-out;
+}
 .toast {
     display: block;
     position: absolute;
     right: 1%;
-    top: 2.5%;
+    top: 9.5%;
     z-index: 2 !important;
     transition: all 0.5s ease-in-out;
 }
-.AddEmployee{
-    height:50px;
-    width:100%;
+
+.AddEmployee {
+    height: 50px;
+    width: 100%;
 }
-.AddEmployee span{
-    display:none;
+
+.AddEmployee span {
+    display: none;
 }
-.sorryGif{
-    width:100px;
-    height:auto;
+
+.sorryGif {
+    width: 100px;
+    height: auto;
     display: block;
     margin: 0 auto;
 }
-.sorryUsenNotFound{
+
+.sorryUsenNotFound {
     font-size: 20px;
     text-align: center;
     text-transform: uppercase;
     color: #3d5ee1;
-    margin-top:0px;
-    margin-bottom:50px;
+    margin-top: 0px;
+    margin-bottom: 50px;
 }
 
+.announcementHeading {
+    text-transform: uppercase;
+    color: #3d5ee1;
+}
+
+.dashBordMenu {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1%;
+}
+
+.dashBordMenuItem {
+    width: 24%;
+    height: auto;
+    background: #fff;
+    padding: 20px 15px;
+    margin-top: 1%;
+    box-shadow: 0px 0px 10px 4px #00000012;
+    border-radius: 10px;
+    color: #3d5ee1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.dashBordMenuItem:hover{
+    box-shadow: 0px 0px 0px 0px #00000012;
+    background: #3d5ee1;
+    color: #fff;
+}
 
 @media screen and (max-width: 600px) {
-    
+    .dashBordMenuItem {
+        width: 90%;
+        margin-top: 5%;
+    }
+    .dashBordMenu {
+        width: 107%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18% !important;
+        flex-direction: column !important;
+    }
+    .Mark_Attendance h1 {
+        font-family: roboto, sans-serif;
+        margin-top: 0;
+        color: #3d5ee1;
+        text-align: center;
+        font-size: 9vw;
+        text-transform: uppercase;
+    }
+    .Mark_Attendance p {
+        color: #606060;
+        font-weight: 600;
+        font-size: 4vw;
+    }
 }

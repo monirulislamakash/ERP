@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% block head %}
+{% endblock %}
+{% block titel %}Leave Application{% endblock %}
+{% block body %}
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="row">
+            {% if succes %}
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="display: block;">
+                <div class="toast-header" style="color:green;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                    </svg>
+                    <strong class="me-auto ms-2">Success</strong>
+
+                    <button type="button" class="btn-close" onclick="toaster()" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    <strong> {{succes}}. </strong>
+                </div>
+            </div>
+            {% endif %}
+            {% if error %}
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="display: block;">
+                <div class="toast-header" style="color:#f0a100;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                    </svg>
+                    <strong class="me-auto ms-2">Sorry !</strong>
+
+                    <button type="button" class="btn-close" onclick="toaster()" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    <strong> {{error}}. </strong>
+                </div>
+            </div>
+            {% endif %}
+            <div class="col-lg-9 col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="{% url 'company:LeaveApplication' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Subject" class="form-control" name="Subject" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <!-- Added an ID and values for JavaScript to work correctly -->
+                                        <select class="form-control" aria-label="Default select example" required
+                                            name="LeaveType" id="leaveTypeSelector">
+                                            <option value="selected">Selected Leave</option>
+                                            <option value="Sick">Sick Leave</option>
+                                            <option value="casual">Casual Leave</option>
+                                            <option value="short">Short Leave</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- This div contains the date/time fields -->
+                            <div class="row LeaveDate">
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping">From</span>
+                                        <!-- The type of this input will be changed dynamically -->
+                                        <input type="date" class="form-control" name="From" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping">To</span>
+                                        <!-- The type of this input will be changed dynamically -->
+                                        <input type="date" class="form-control" name="To" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea rows="4" class="form-control summernote" name="Massage" required
+                                    placeholder="Enter your message here"></textarea>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <input type="file" class="form-control" placeholder="Recipient’s username" required
+                                    aria-label="Recipient’s username" aria-describedby="basic-addon2">
+                                <span class="input-group-text" id="basic-addon2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-upload" viewBox="0 0 16 16">
+                                        <path
+                                            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
+                                        <path
+                                            d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z" />
+                                    </svg>
+                                </span>
+                            </div>
+
+                            <div class="form-group mb-0">
+                                <div class="text-left">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fas fa-paper-plane m-r-5"></i>
+                                        <span>Send</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Get the select element and the input fields
+        const leaveTypeSelector = document.getElementById('leaveTypeSelector');
+        const dateInputs = document.querySelectorAll('.LeaveDate input');
+
+        /**
+         * This function handles changing the input type based on the selected leave type.
+         */
+        const handleLeaveTypeChange = () => {
+            const selectedValue = leaveTypeSelector.value;
+            const inputType = (selectedValue === 'short') ? 'time' : 'date';
+
+            dateInputs.forEach(input => {
+                // Change the input type and clear the value to avoid invalid data
+                input.type = inputType;
+                input.value = '';
+            });
+        };
+
+        // Add an event listener to call the function whenever the selection changes
+        leaveTypeSelector.addEventListener('change', handleLeaveTypeChange);
+
+        // Call the function on page load to set the initial state correctly
+        handleLeaveTypeChange();
+    });
+</script>
+{% endblock %}

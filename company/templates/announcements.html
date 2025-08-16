@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% block head %}
+{% endblock %}
+{% block title %}Home{% endblock %}
+{% block body %}
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="row">
+            {% if search %}
+            {% for announcements in announcements %}
+            <div class="col-lg-12 col-md-12 card">
+                <div class="card-body mb-4">
+                    <h1 class="announcementHeading mb-3">{{announcements.Titel}}</h1>
+                    <div class="announcementsBody">
+                        {{announcements.Announcement|safe}}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="col-lg-12 col-md-12 card">
+                <div class="card-body">
+                    <h1 class="announcementHeading mb-3">{{announcements.Titel}}</h1>
+                    <div class="announcementsBody">
+                        {{announcements.Announcement|safe}}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

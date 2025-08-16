@@ -21,11 +21,11 @@
                             <div class="col-lg-4 col-md-4">
                                 <div class="profile-user-box">
                                     <div class="profile-user-img">
-                                        <img src="{{userMyInfo.Image.url}}" alt="Profile">
+                                        <img src="{{ApplyedUser.Image.url}}" alt="Profile">
                                     </div>
                                     <div class="names-profiles">
-                                        <h4>{{userMyInfo.FirstName}}</h4>
-                                        <h5>{{userMyInfo.Designation}}</h5>
+                                        <h4>{{ApplyedUser.FirstName}}</h4>
+                                        <h5>{{ApplyedUser.Designation}}</h5>
                                     </div>
                                 </div>
                             </div>
@@ -75,16 +75,16 @@
                                     </div>
                                     <div class="views-personal">
                                         <h4>Name</h4>
-                                        <h5>{{userMyInfo.FirstName}} {{userMyInfo.LastName}}</h5>
+                                        <h5>{{ApplyedUser.FirstName}} {{ApplyedUser.LastName}}</h5>
                                     </div>
                                 </div>
                                 <div class="personal-activity">
                                     <div class="personal-icons">
-                                       <i class="feather-briefcase"></i>
+                                        <i class="feather-briefcase"></i>
                                     </div>
                                     <div class="views-personal">
                                         <h4>Department </h4>
-                                        <h5>{{userMyInfo.Department}}</h5>
+                                        <h5>{{ApplyedUser.Department}}</h5>
                                     </div>
                                 </div>
                                 <div class="personal-activity">
@@ -93,7 +93,7 @@
                                     </div>
                                     <div class="views-personal">
                                         <h4>Mobile</h4>
-                                        <h5>{{userMyInfo.PhoneNumbe}}</h5>
+                                        <h5>{{ApplyedUser.PhoneNumbe}}</h5>
                                     </div>
                                 </div>
                                 <div class="personal-activity">
@@ -103,7 +103,7 @@
                                     <div class="views-personal">
                                         <h4>Email</h4>
                                         <h5>
-                                            {{userMyInfo.Email}}
+                                            {{ApplyedUser.Email}}
                                         </h5>
                                     </div>
                                 </div>
@@ -113,7 +113,7 @@
                                     </div>
                                     <div class="views-personal">
                                         <h4>Date of Join</h4>
-                                        <h5>{{userMyInfo.JoiningDate}}</h5>
+                                        <h5>{{ApplyedUser.JoiningDate}}</h5>
                                     </div>
                                 </div>
                                 <div class="personal-activity mb-0">
@@ -122,7 +122,7 @@
                                     </div>
                                     <div class="views-personal">
                                         <h4>Address</h4>
-                                        <h5>{{userMyInfo.PresentAddress}}</h5>
+                                        <h5>{{ApplyedUser.PresentAddress}}</h5>
                                     </div>
                                 </div>
                             </div>
@@ -134,43 +134,55 @@
                         <div class="card mb-0">
                             <div class="card-body">
                                 <div class="heading-detail">
-                                    <h4>Projects List</h4>
+                                    <h4>Leave Application</h4>
                                 </div>
-                                <div class="table-responsive mb-3">
-                                    <table
-                                        class="table border-0 star-student table-hover table-center mb-0 datatable table-striped mb-3">
-                                        <thead class="student-thread">
-                                            <tr>
-                                                <th>Project Name</th>
-                                                <th>Assign Date</th>
-                                                <th>Submition Date</th>
-                                                <th>Status</th>
-                                                <th>Priority</th>
-                                                <th class="text-end">View</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Create: Ray Advertising Official Internal CRM</td>
-                                                <td>
-                                                    07/30/2025
-                                                </td>
-                                                <td>08/30/2025</td>
-                                                <td>Working On</td>
-                                                <td>
-                                                    <span class="badge badge-label bg-danger"><i
-                                                            class="mdi mdi-circle-medium"></i> high</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <div class="actions">
-                                                        <a href="javascript:;" class="btn btn-sm bg-success-light me-2">
-                                                            <i class="feather-eye"></i>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="mb-3">
+                                    <!-- To Section -->
+                                    <div class="mb-6">
+                                        <p class="text-gray-600">
+                                            <b>To,</b><br>
+                                            {{user.FirstName}} {{user.LastName}}<br>
+                                            {{user.Designation}}<br>
+                                            Raya Avertising<br>
+                                            {{user.Department}}
+                                        </p>
+                                    </div>
+
+                                    <!-- From Section -->
+                                    <div class="mb-6">
+                                        <p class="text-gray-600">
+                                            <b>From,</b><br>
+                                            {{applications.Name}}<br>
+                                            {{ApplyedUser.Designation}}<br>
+                                        </p>
+                                    </div>
+
+                                    <!-- Date Section -->
+                                    <div class="mb-6 text-gray-600">
+                                        <b>Date of Application :</b> {{applications.SubmitionDate}}
+                                    </div>
+
+                                    <!-- Subject Line -->
+                                    <div class="mb-6 font-semibold">
+                                        <b>Subject :</b> {{applications.Subject}}<br>
+                                        <b>From :</b> {{applications.FromDate}}<br>
+                                        <b>To :</b> {{applications.ToDate}}<br>
+                                    </div>
+
+                                    <!-- Body Paragraphs -->
+                                    <div class="text-gray-800 leading-relaxed space-y-4">
+                                        <br>
+                                        <p><b>Dear</b> {{user.FirstName}} {{user.LastName}} Sir,</p>
+
+                                        <p>
+                                            {{applications.Massage | safe}}
+                                        </p>
+
+                                        <p>Sincerely,</p>
+                                        <p class="mt-4 font-bold">
+                                            {{applications.Name}}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

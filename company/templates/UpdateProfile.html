@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% block head %}
+{% endblock %}
+{% block titel %}Update Profile{% endblock %}
+{% block body %}
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="row">
+            {% if addStatus == "success" %}
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="display: block;">
+                <div class="toast-header" style="color:green;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                    </svg>
+                    <strong class="me-auto ms-2">Success</strong>
+
+                    <button type="button" class="btn-close" onclick="toaster()" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    <strong>User Added successfully.</strong>
+                </div>
+            </div>
+            {% elif addStatus == "error" %}
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="display: block;">
+                <div class="toast-header text-danger">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                    </svg>
+                    <strong class="me-auto ms-2">Sorry !</strong>
+
+                    <button type="button" class="btn-close" onclick="toaster()" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    <strong>User Already Exists</strong>
+                </div>
+            </div>
+            {% endif %}
+            <div class="col-lg-8 m-auto">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Update Your Profile</h5>
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url 'company:UpdateProfile' %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">First Name</label>
+                                <input type="text" name="firstname" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" value="{{getMyInfo.FirstName}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Last Name</label>
+                                <input type="text" name="lastname" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" value="{{getMyInfo.LastName}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Email</label>
+                                <input type="text" name="email" required class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" value="{{getMyInfo.Email}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Phone Number</label>
+                                <input type="text" name="phonenumber" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" value="{{getMyInfo.PhoneNumbe}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Emergency Phone Number</label>
+                                <input type="text" name="EmergencyPhoneNumber" class="form-control"
+                                    id="exampleInputEmail1" aria-describedby="emailHelp"  value="{{getMyInfo.EmergencyPhoneNumber}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Designation</label>
+                                <input type="text" name="Designation" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp"  value="{{getMyInfo.Designation}}" aria-label="Disabled input example" disabled>
+                            </div>
+                            <select name="Department" class="form-select mb-3" aria-label="Default select example">
+                                <option>{{getMyInfo.Department}}</option>
+                            </select>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Permanent Address</label>
+                                <input type="text" name="PermanentAddress" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp"  value="{{getMyInfo.PermanentAddress}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Present Address</label>
+                                <input type="text" name="PresentAddress" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp"  value="{{getMyInfo.PresentAddress}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Joining Date</label>
+                                <input type="text" name="JoiningDate" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp"  value="{{getMyInfo.JoiningDate}}" aria-label="Disabled input example" disabled>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Permanency Date</label>
+                                <input type="text" name="PermanencyDate" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp"  value="{{getMyInfo.PermanencyDate}}" aria-label="Disabled input example" disabled>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Image</label>
+                                <input type="file" name="Image" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp"  value="">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Bank Name</label>
+                                <input type="text" name="BankName" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp"  value="{{getMyInfo.BankName}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Bank Account Name</label>
+                                <input type="text" name="BankAccountName" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp"  value="{{getMyInfo.BankAccountName}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Bank Account Number</label>
+                                <input type="text" name="BankAccountNumber" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp"  value="{{getMyInfo.BankAccountNumber}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Bank Branch Name</label>
+                                <input type="text" name="BankBranchName" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp"  value="{{getMyInfo.BankBranchName}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Bank Swift Code</label>
+                                <input type="text" name="BankSwiftCode" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp"  value="{{getMyInfo.BankSwiftCode}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Bank Routing Number</label>
+                                <input type="text" name="BankRoutingNumber" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp"  value="{{getMyInfo.BankRoutingNumber}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Bank Phone Number</label>
+                                <input type="text" name="BankPhoneNumber" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp"  value="{{getMyInfo.BankPhoneNumber}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">NID Number</label>
+                                <input type="text" name="NIDNumber" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp"  value="{{getMyInfo.NIDNumber}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">TIN Number</label>
+                                <input type="text" name="TINNumber" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp"  value="{{getMyInfo.TINNumber}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Father Name</label>
+                                <input type="text" name="FatherName" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp"  value="{{getMyInfo.FatherName}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Mother Name</label>
+                                <input type="text" name="MotherName" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp"  value="{{getMyInfo.MotherName}}">
+                            </div>
+                            <select name="EmployeStatus" class="form-select mb-3" aria-label="Default select example">
+                                <option>{{getMyInfo.EmployeStatus}}</option>
+                            </select>
+                           
+                            <div class="d-grid gap-2 mt-5">
+                                <button class="btn btn-primary AddEmployee" type="submit">
+                                    <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                                    Update Profile
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

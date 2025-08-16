@@ -2,19 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import auth
 from datetime import datetime
+from tinymce import models as tinymce_models
 # Create your models here.
 
 class Department(models.Model):
     Department=models.CharField(max_length=50,default='NA')
     def __str__(self):
         return str(self.Department)
-
-class Announcement(models.Model):
-    AnnouncementTitel=models.CharField(max_length=200,default='NA')
-    Announcement=models.TextField()
-    def __str__(self):
-        return str(self.AnnouncementTitel)
-
 class UserProfile(models.Model):
     User=models.ForeignKey(User,on_delete=models.CASCADE)
     UserAccess_CHOICES = (
@@ -63,3 +57,49 @@ class UserProfile(models.Model):
     PromotionLetter=models.FileField(upload_to='media/user/PromotionLetter/',null=True)
     UserStatus=models.BooleanField(default=True)
     # Legal documents end
+
+class Leave_Applications(models.Model):
+    User=models.ForeignKey(User,on_delete=models.CASCADE)
+    Name=models.CharField(max_length=20)
+    Subject=models.CharField(max_length=200, default="NA")
+    Document=models.FileField(upload_to='media/user/LeaveApplication/', null=True)
+    LeaveType=models.CharField(max_length=20,default="NA")
+    SubmitionDate=models.DateField(max_length=50,default=datetime.today())
+    FromDate=models.CharField(max_length=50,default="NA")
+    ToDate=models.CharField(max_length=50,default="NA")
+    Massage=models.TextField()
+    HR_approval=models.BooleanField(default=False)
+    PM_approval=models.BooleanField(default=False)
+    MD_approval=models.BooleanField(default=False)
+    HR_reject=models.BooleanField(default=False)
+    PM_reject=models.BooleanField(default=False)
+    MD_reject=models.BooleanField(default=False)
+class Announcement(models.Model):
+    Titel=models.CharField(max_length=300,default='')
+    Announcement=tinymce_models.HTMLField()
+    Post_Date=models.DateField(default=datetime.today())
+
+class Attendance(models.Model):
+    Employee=models.ForeignKey(User,on_delete=models.CASCADE)
+    Signing_In_Time = models.CharField(default=0,max_length=20)
+    Prayer_Break= models.CharField(default=0,max_length=20)
+    Dinner_Break = models.CharField(default=0,max_length=20)
+    Tea_Break = models.CharField(default=0,max_length=20)
+    Signing_Out_Time = models.CharField(default=0,max_length=20)
+    Date= models.DateField(default=datetime.today())
+
+# ====================================================================================
+
+class permission_AddUser(models.Model):
+    User=models.ForeignKey(User,on_delete=models.CASCADE)
+    View=models.BooleanField(default=False)
+    Edit=models.BooleanField(default=False)
+
+class permission_UserList(models.Model):
+    User=models.ForeignKey(User,on_delete=models.CASCADE)
+    View=models.BooleanField(default=False)
+    Edit=models.BooleanField(default=False)
+class permission_LeaveApprovel(models.Model):
+    User=models.ForeignKey(User,on_delete=models.CASCADE)
+    View=models.BooleanField(default=False)
+    Edit=models.BooleanField(default=False)
